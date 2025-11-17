@@ -43,7 +43,7 @@ function About() {
       {/* About Section 1 */}
       <section style={{ margin: "80px auto" }} className="container">
         <div className="row align-items-center">
-          <div className="col-md-6" >
+          <div className="col-md-6">
             <h2 className="fw-bold text-primary mb-4">
               We are highly skilled mechanics for your car repair
             </h2>
@@ -58,11 +58,7 @@ function About() {
               expertise, so you can drive with confidence.
             </p>
           </div>
-          <div
-            className="col-md-6 text-center"
-            
-            data-aos-delay="200"
-          >
+          <div className="col-md-6 text-center" data-aos-delay="200">
             <img
               src={car_tire}
               alt="Mechanic holding car tire"
@@ -86,15 +82,14 @@ function About() {
                   className="position-absolute img-fluid w-100 h-100"
                   src={about}
                   style={{ objectFit: "cover" }}
-                  alt="About AutoPro"
+                  alt="About MotiCare"
                 />
                 <div
                   className="position-absolute top-0 end-0 mt-n4 me-n4 py-4 px-5"
                   style={{ background: "rgba(0, 0, 0, .08)" }}
                 >
                   <h1 className="display-4 text-white mb-0">
-                    12<sup>+</sup>{" "}
-                    <span className="fs-4">Years</span>
+                    12<sup>+</sup> <span className="fs-4">Years</span>
                   </h1>
                   <h4 className="text-white">Experience</h4>
                 </div>
@@ -103,7 +98,7 @@ function About() {
             <div className="col-lg-6" data-aos="fade-out">
               <h6 className="text-primary text-uppercase">// About Us //</h6>
               <h1 className="mb-2">
-                <span className="text-primary">AutoPro</span> Is The Best Place
+                <span className="text-primary">MotiCare</span> Is The Best Place
                 For Your Auto Care
               </h1>
               <p className="mb-4">
@@ -115,11 +110,7 @@ function About() {
 
               {/* Features */}
               <div className="row g-4 mb-3 pb-3">
-                <div
-                  className="col-12"
-                  data-aos="fade-up"
-                  data-aos-delay="100"
-                >
+                <div className="col-12" data-aos="fade-up" data-aos-delay="100">
                   <div className="d-flex">
                     <div
                       className="bg-light d-flex flex-shrink-0 align-items-center justify-content-center mt-1"
@@ -133,11 +124,7 @@ function About() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="col-12"
-                  data-aos="fade-up"
-                  data-aos-delay="300"
-                >
+                <div className="col-12" data-aos="fade-up" data-aos-delay="300">
                   <div className="d-flex">
                     <div
                       className="bg-light d-flex flex-shrink-0 align-items-center justify-content-center mt-1"
@@ -151,11 +138,7 @@ function About() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="col-12"
-                  data-aos="fade-up"
-                  data-aos-delay="500"
-                >
+                <div className="col-12" data-aos="fade-up" data-aos-delay="500">
                   <div className="d-flex">
                     <div
                       className="bg-light d-flex flex-shrink-0 align-items-center justify-content-center mt-1"
@@ -165,9 +148,7 @@ function About() {
                     </div>
                     <div className="ps-3">
                       <h6>Awards Winning Workers</h6>
-                      <span>
-                        Recognized for excellence and reliability.
-                      </span>
+                      <span>Recognized for excellence and reliability.</span>
                     </div>
                   </div>
                 </div>

@@ -3,22 +3,19 @@ import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import carousel_bg_1 from "../../../assets/img/carousel-bg-1.jpg";
-import {ClipLoader} from "react-spinners"
+import { ClipLoader } from "react-spinners";
 
 function Contact() {
-  const [isLoading,setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
-   
   }, []);
 
   useEffect(() => {
-  setTimeout(() => {
-   setLoading(false)
-   
-  }, 5000);
-}, []);
-
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+  }, []);
 
   return (
     <>
@@ -57,23 +54,25 @@ function Contact() {
         <div className="container">
           <div className="row g-4">
             {/* Google Map */}
-            <div
-              className="col-md-6"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
-             {
-              isLoading ? <div style={{ height: "450px",background: "#E5E3DF" }} className="d-flex justify-content-center align-items-center"><ClipLoader size={50} color="#B8101F" /> </div>
-               :  <iframe
-                className="position-relative rounded w-100 h-100"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15957.566146462412!2d38.7468892!3d9.0301406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b8539d253a3a3%3A0x5e3b6ea1df37e2e3!2sAddis%20Ababa%2C%20Ethiopia!5e0!3m2!1sen!2set!4v1720989000000!5m2!1sen!2set"
-                frameBorder="0"
-                style={{ minHeight: "350px", border: "0" }}
-                allowFullScreen=""
-                aria-hidden="false"
-                tabIndex="0"
-              ></iframe>
-             }
+            <div className="col-md-6" data-aos="fade-up" data-aos-delay="100">
+              {isLoading ? (
+                <div
+                  style={{ height: "450px", background: "#E5E3DF" }}
+                  className="d-flex justify-content-center align-items-center"
+                >
+                  <ClipLoader size={50} color="#B8101F" />{" "}
+                </div>
+              ) : (
+                <iframe
+                  className="position-relative rounded w-100 h-100"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7977.682238021306!2d36.804878844823264!3d-1.268124694879225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f173c0a1f9de7%3A0xad2c84df1f7f2ec8!2sWestlands%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1762530562617!5m2!1sen!2ske"
+                  frameBorder="0"
+                  style={{ minHeight: "350px", border: "0" }}
+                  allowFullScreen=""
+                  aria-hidden="false"
+                  tabIndex="0"
+                ></iframe>
+              )}
             </div>
 
             {/* Contact Form */}
@@ -143,7 +142,11 @@ function Contact() {
             </div>
 
             {/* Contact Info */}
-            <div className="col-12 mt-5" data-aos="fade-up" data-aos-delay="100">
+            <div
+              className="col-12 mt-5"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
               <div className="text-center mb-5">
                 <h1>Contact For Any Query</h1>
               </div>
@@ -153,7 +156,7 @@ function Contact() {
                     <h5 className="text-uppercase">Phone</h5>
                     <p className="m-0">
                       <i className="fa fa-phone-alt text-primary me-2"></i>
-                      +251-985102027
+                      +254 725 010 898
                     </p>
                   </div>
                 </div>
@@ -162,7 +165,7 @@ function Contact() {
                     <h5 className="text-uppercase">Email</h5>
                     <p className="m-0">
                       <i className="fa fa-envelope-open text-primary me-2"></i>
-                      amirmubarek@gmail.com
+                      antonymurithi51@gmail.com
                     </p>
                   </div>
                 </div>
@@ -171,13 +174,12 @@ function Contact() {
                     <h5 className="text-uppercase">Address</h5>
                     <p className="m-0">
                       <i className="fa fa-map-marker-alt text-primary me-2"></i>
-                      A.A, Ethiopia
+                      Nairobi, Kenya
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>

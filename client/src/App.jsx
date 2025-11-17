@@ -26,7 +26,7 @@ import ServicePage from "./pages/ServicePage/ServicePage";
 import Contact from "./pages/Contact/Contact";
 import NotFound from "./pages/404/404";
 import BackToTop from "./components/BackToTop/BackToTop";
-import AllOrders from "./pages/Order/AllOrders/AllOrders"
+import AllOrders from "./pages/Order/AllOrders/AllOrders";
 import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
@@ -54,17 +54,17 @@ function App() {
         {/* for all */}
         <Route path="/order/:orderHash" element={<SingleOrderPage />} />
 
-       {/* for all  */}
+        {/* for all  */}
         <Route
           path="/order-detail"
           element={
-            <PrivateRoute role={[1,2, 3]}>
+            <PrivateRoute role={[1, 2, 3]}>
               <OrderDetail />
             </PrivateRoute>
           }
         />
 
-      {/* for admin only  */}
+        {/* for admin only  */}
         <Route
           path="/add-employee"
           element={
@@ -100,7 +100,7 @@ function App() {
             </PrivateRoute>
           }
         />
-      {/* for manager and admin */}
+        {/* for manager and admin */}
         <Route
           path="/add-customer"
           element={
@@ -147,7 +147,7 @@ function App() {
         />
       </Routes>
       <Footer />
-       <BackToTop />
+      <BackToTop />
     </>
   );
 }

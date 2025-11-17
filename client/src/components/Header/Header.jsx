@@ -39,7 +39,7 @@ function Header() {
       >
         <Link to="/" className="navbar-brand d-flex align-items-center px-lg-5">
           <h2 className="m-0 text-primary">
-            <i className="fa fa-car mx-1"></i>AutoPro
+            <i className="fa fa-car mx-1"></i>MotiCare
           </h2>
         </Link>
 

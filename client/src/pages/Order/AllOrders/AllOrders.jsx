@@ -6,6 +6,7 @@ import { RingLoader } from "react-spinners";
 import { format } from "date-fns";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import React from "react";
 
 function AllOrders() {
   const [orders, setOrders] = useState([]);
@@ -55,10 +56,8 @@ function AllOrders() {
         setCustomers(customersData);
         setVehicles(vehiclesData);
         setServices(allServicesData);
-        setOrders(allServicesData);
 
         const ordersData = ordersRes.data.msg || [];
-        setHash(ordersData);
         console.log(ordersData);
 
         const mappedOrders = ordersData.map((o) => {
@@ -78,8 +77,9 @@ function AllOrders() {
             (s) => s.service_completed === "Ready for Pickup"
           );
           const additionalReady =
-            (o.services[0]?.additional_requests_completed || "") ===
-            "Ready for Pickup";
+            (o.services && o.services.length > 0
+              ? o.services[0].additional_requests_completed
+              : "") === "Ready for Pickup";
 
           const status = allReady && additionalReady ? "Closed" : "Open";
 
@@ -289,7 +289,7 @@ function AllOrders() {
                   {orders.length > 0 ? (
                     orders.map((order, index) => {
                       return (
-                        <>
+                        <React.Fragment key={order.order_id}>
                           {/* Render services normally */}
                           {order.services.map((s, sIdx) => {
                             const serviceName =
@@ -318,13 +318,18 @@ function AllOrders() {
                                         {order.customer.customer_first_name}{" "}
                                         {order.customer.customer_last_name}
                                       </strong>
-                                     
-                                      <p className="text-muted " style={{ marginTop: "15px"}}>
-                                        <p className="fw-bold" style={{ fontSize: "14px"}}>
+
+                                      <p
+                                        className="text-muted "
+                                        style={{ marginTop: "15px" }}
+                                      >
+                                        <p
+                                          className="fw-bold"
+                                          style={{ fontSize: "14px" }}
+                                        >
                                           {order.order_hash}
                                         </p>
-                                        
-                                        <small style={{ fontSize: "12px"}}>
+                                        <small style={{ fontSize: "12px" }}>
                                           📞
                                         </small>{" "}
                                         {order.customer.customer_phone_number}
@@ -479,7 +484,7 @@ function AllOrders() {
                               )}
                             </td>
                           </tr>
-                        </>
+                        </React.Fragment>
                       );
                     })
                   ) : (

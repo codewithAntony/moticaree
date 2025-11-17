@@ -22,12 +22,12 @@ function Login() {
       });
 
       console.log(result.data);
-      localStorage.setItem("Token",result.data.token)
+      localStorage.setItem("Token", result.data.token);
       navigate("/");
       window.location.reload();
     } catch (error) {
       console.log(error.response?.data);
-      setError(error.response?.data.msg)
+      setError(error.response?.data.msg);
     }
   }
   return (
@@ -60,14 +60,19 @@ function Login() {
                 <label htmlFor="password">Password</label>
               </div>
             </div>
-             <small
-            style={{ color: "red", fontSize: "14px", paddingBottom: "3px",margin : "10px 250px" }}
-          >
-            {error}
-          </small>
+            <small
+              style={{
+                color: "red",
+                fontSize: "14px",
+                paddingBottom: "3px",
+                margin: "10px 250px",
+              }}
+            >
+              {error}
+            </small>
             <div className="col-12">
               <button className="btn btn-primary w-100 py-3" type="submit">
-                Send Message
+                Login
               </button>
             </div>
           </div>

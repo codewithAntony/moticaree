@@ -132,16 +132,17 @@ CREATE TABLE IF NOT EXISTS `order_status` (
 ) ENGINE=InnoDB;
 
 -- Add the roles to the database         below this to check if the tables are created correctly
-INSERT INTO company_roles (company_role_name)
+INSERT IGNORE INTO company_roles (company_role_name)
 VALUES ('Employee'), ('Manager'), ('Admin');
 
 -- Add the roles to the database         below this to check if the tables are created correctly
-INSERT INTO order_status (order_status)
+INSERT IGNORE INTO order_status (order_status)
 VALUES ('Received'), ('In Progress'), ('Quality Check'), ('Ready for Pickup');
 
--- -- Create admin employee account
+
+-- -- -- Create admin employee account
 -- INSERT INTO employee (employee_email, active_employee, added_date)
--- VALUES ('admin@autopro.com', 1, CURRENT_TIMESTAMP);
+-- VALUES ('admin@MotiCare.com', 1, CURRENT_TIMESTAMP);
 
 -- -- Insert admin's personal info
 -- INSERT INTO employee_info (employee_id, employee_first_name, employee_last_name, employee_phone)

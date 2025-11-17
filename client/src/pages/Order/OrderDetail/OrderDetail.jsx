@@ -13,13 +13,20 @@ function OrderDetail() {
   const auth = getAuth();
   const token = auth?.token || "";
 
-  const steps = ["Received", "In Progress", "Quality Check", "Ready for Pickup"];
+  const steps = [
+    "Received",
+    "In Progress",
+    "Quality Check",
+    "Ready for Pickup",
+  ];
 
   // Fetch customers
   useEffect(() => {
     async function fetchCustomers() {
       try {
-        const res = await axios.get("/customers", { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get("/customers", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setCustomers(res.data.msg || []);
       } catch (err) {
         console.error("Failed to fetch customers:", err);
@@ -32,7 +39,9 @@ function OrderDetail() {
   useEffect(() => {
     async function fetchVehicles() {
       try {
-        const res = await axios.get("/vehicles", { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get("/vehicles", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setVehicles(res.data.msg || []);
       } catch (err) {
         console.error("Failed to fetch vehicles:", err);
@@ -45,11 +54,12 @@ function OrderDetail() {
   useEffect(() => {
     async function fetchOrders() {
       try {
-        const res = await axios.get("/orders", { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get("/orders", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         const ordersData = res.data.msg || [];
         setOrders(ordersData);
-        console.log(ordersData);
-        
+        console.log("order data:", ordersData);
 
         if (ordersData.length > 0) {
           const orderDate = new Date(ordersData[0].order_date);
@@ -66,25 +76,33 @@ function OrderDetail() {
   }, [token]);
 
   const order = orders[0] || {};
-  const customer = customers.find(c => c.customer_id === order.customer_id) || {};
-  const vehicle = vehicles.find(v => v.vehicle_id === order.vehicle_id) || {};
-  const services = order.services || [];
- // Text comes from order.additional_request (string description)
-  // Status comes from the service array (the extra hardcoded service row)
-  const additionalRequestText = order.additional_request || "";
-  const additionalRequestStatus =
-  services.find(s => s.additional_requests_completed)?.additional_requests_completed || "Not Started";
+  const customerName = order.customer_first_name
+    ? `${order.customer_first_name} ${order.customer_last_name}`
+    : "-";
+  const customerEmail = order.customer_email || "-";
+  const customerPhone = order.customer_phone_number || "-";
+
+  const vehicleMake = order.vehicle_make || "-";
+  const vehicleModel = order.vehicle_model || "-";
+  const vehicleYear = order.vehicle_year || "-";
+  const vehicleColor = order.vehicle_color || "-";
+  const vehicleSerial = order.vehicle_serial || "-";
+  const vehicleTag = order.vehicle_tag || "-";
 
   console.log(order);
-  
 
   const getCircleColor = (step) => {
     switch (step) {
-      case "Received": return "#343a40"; // dark
-      case "In Progress": return "#ffc107"; // warning
-      case "Quality Check": return "#999"; // NEW inline
-      case "Ready for Pickup": return "#28a745"; // success
-      default: return "#6c757d"; // secondary
+      case "Received":
+        return "#343a40"; // dark
+      case "In Progress":
+        return "#ffc107"; // warning
+      case "Quality Check":
+        return "#999"; // NEW inline
+      case "Ready for Pickup":
+        return "#28a745"; // success
+      default:
+        return "#6c757d"; // secondary
     }
   };
 
@@ -92,35 +110,59 @@ function OrderDetail() {
     if (idx === orderStatus) return "#343a40";
     if (idx < orderStatus) return "#28a745";
     switch (step) {
-      case "Received": return "#6c757d";
-      case "In Progress": return "#ffc107";
-      case "Quality Check": return "#999"; // NEW inline
-      case "Ready for Pickup": return "#28a745";
-      default: return "#6c757d";
+      case "Received":
+        return "#6c757d";
+      case "In Progress":
+        return "#ffc107";
+      case "Quality Check":
+        return "#999"; // NEW inline
+      case "Ready for Pickup":
+        return "#28a745";
+      default:
+        return "#6c757d";
     }
   };
 
   const getBadgeStyle = (status) => {
     switch (status) {
-      case "Received": return { backgroundColor: "#343a40", color: "#fff" };
-      case "In Progress": return { backgroundColor: "#ffc107", color: "#343a40" };
-      case "Quality Check": return { backgroundColor: "#999", color: "#fff" }; // NEW inline
-      case "Ready for Pickup": return { backgroundColor: "#28a745", color: "#fff" };
-      default: return { backgroundColor: "#6c757d", color: "#fff" };
+      case "Received":
+        return { backgroundColor: "#343a40", color: "#fff" };
+      case "In Progress":
+        return { backgroundColor: "#ffc107", color: "#343a40" };
+      case "Quality Check":
+        return { backgroundColor: "#999", color: "#fff" }; // NEW inline
+      case "Ready for Pickup":
+        return { backgroundColor: "#28a745", color: "#fff" };
+      default:
+        return { backgroundColor: "#6c757d", color: "#fff" };
     }
   };
 
   return (
     <div className="container my-5">
       <header className="mb-4">
-        <div className="card" style={{ backgroundColor: "#f8f9fa", padding: "8px", borderRadius: "8px", maxWidth: "fit-content" }}>
+        <div
+          className="card"
+          style={{
+            backgroundColor: "#f8f9fa",
+            padding: "8px",
+            borderRadius: "8px",
+            maxWidth: "fit-content",
+          }}
+        >
           <h5 className="mb-0 d-flex align-items-center">
             <i className="fa fa-info-circle me-2 p-2 text-primary"></i>
             Order Details for{" "}
-            <div className="text-danger p-2">{customer.customer_first_name ? `${customer.customer_first_name} ${customer.customer_last_name}` : "-"}</div>
+            <div className="text-danger p-2">
+              {customer.customer_first_name
+                ? `${customer.customer_first_name} ${customer.customer_last_name}`
+                : "-"}
+            </div>
           </h5>
         </div>
-        <strong className="text-muted">Track your order progress and details below.</strong>
+        <strong className="text-muted">
+          Track your order progress and details below.
+        </strong>
       </header>
 
       {/* Timeline */}
@@ -136,10 +178,17 @@ function OrderDetail() {
                   backgroundColor: getCircleColor(step),
                   borderRadius: "50%",
                   margin: "0 auto 8px",
-                  zIndex: 2
+                  zIndex: 2,
                 }}
               />
-              <small style={{ color: getTextColor(step, idx), fontWeight: step === "Quality Check" ? 600 : 500 }}>{step}</small>
+              <small
+                style={{
+                  color: getTextColor(step, idx),
+                  fontWeight: step === "Quality Check" ? 600 : 500,
+                }}
+              >
+                {step}
+              </small>
               {idx < steps.length - 1 && (
                 <div
                   style={{
@@ -150,7 +199,7 @@ function OrderDetail() {
                     top: "50%",
                     left: "100%",
                     transform: "translateY(-50%)",
-                    zIndex: 1
+                    zIndex: 1,
                   }}
                 />
               )}
@@ -163,30 +212,71 @@ function OrderDetail() {
         {/* Left: Customer & Vehicle */}
         <aside className="col-lg-5 mb-4">
           <section className="card shadow-sm rounded">
-            <header className="card-header" style={{ backgroundColor: "#dc3545", color: "#fff", fontWeight: "bold" }}>
+            <header
+              className="card-header"
+              style={{
+                backgroundColor: "#dc3545",
+                color: "#fff",
+                fontWeight: "bold",
+              }}
+            >
               <i className="fa fa-user me-2"></i> Customer Info
             </header>
             <div className="card-body">
-              <p><strong>Name:</strong> {customer.customer_first_name ? `${customer.customer_first_name} ${customer.customer_last_name}` : "-"}</p>
-              <p><strong>Email:</strong> {customer.customer_email || "-"}</p>
-              <p><strong>Phone:</strong> {customer.customer_phone_number || "-"}</p>
+              <p>
+                <strong>Name:</strong>
+                {customerName}
+              </p>
+              <p>
+                <strong>Email:</strong> {customerEmail}
+              </p>
+              <p>
+                <strong>Phone:</strong> {customerPhone}
+              </p>
               <hr />
-              <p><strong>Order Date:</strong> {order.order_date ? format(new Date(order.order_date), "dd/MM/yyyy") : "-"}</p>
-              <p><strong>Estimated Completion:</strong> {estimatedCompletion || "-"}</p>
+              <p>
+                <strong>Order Date:</strong>{" "}
+                {order.order_date
+                  ? format(new Date(order.order_date), "dd/MM/yyyy")
+                  : "-"}
+              </p>
+              <p>
+                <strong>Estimated Completion:</strong>{" "}
+                {estimatedCompletion || "-"}
+              </p>
             </div>
           </section>
 
           <section className="card shadow-sm rounded mt-4">
-            <header className="card-header" style={{ backgroundColor: "#dc3545", color: "#fff", fontWeight: "bold" }}>
+            <header
+              className="card-header"
+              style={{
+                backgroundColor: "#dc3545",
+                color: "#fff",
+                fontWeight: "bold",
+              }}
+            >
               <i className="fa fa-car me-2"></i> Vehicle Info
             </header>
             <div className="card-body">
-              <p><strong>Make:</strong> {vehicle.vehicle_make || "-"}</p>
-              <p><strong>Model:</strong> {vehicle.vehicle_type || "-"}</p>
-              <p><strong>Color:</strong> {vehicle.vehicle_color || "-"}</p>
-              <p><strong>Year:</strong> {vehicle.vehicle_year || "-"}</p>
-              <p><strong>Serial:</strong> {vehicle.vehicle_serial || "-"}</p>
-              <p><strong>Tag:</strong> {vehicle.vehicle_tag || "-"}</p>
+              <p>
+                <strong>Make:</strong> {vehicleMake}
+              </p>
+              <p>
+                <strong>Model:</strong> {vehicleModel}
+              </p>
+              <p>
+                <strong>Color:</strong> {vehicleColor}
+              </p>
+              <p>
+                <strong>Year:</strong> {vehicleYear}
+              </p>
+              <p>
+                <strong>Serial:</strong> {vehicleSerial}
+              </p>
+              <p>
+                <strong>Tag:</strong> {vehicleTag}
+              </p>
             </div>
           </section>
         </aside>
@@ -194,53 +284,88 @@ function OrderDetail() {
         {/* Right: Services & Summary */}
         <main className="col-lg-7">
           <section className="card shadow-sm rounded">
-            <header className="card-header" style={{ backgroundColor: "#dc3545", color: "#fff", fontWeight: "bold" }}>
+            <header
+              className="card-header"
+              style={{
+                backgroundColor: "#dc3545",
+                color: "#fff",
+                fontWeight: "bold",
+              }}
+            >
               <i className="fa fa-cogs me-2"></i> Services Requested
             </header>
             <div className="card-body">
               {services.length === 0 ? (
                 <p className="text-muted fst-italic">No services selected.</p>
               ) : (
-                services.map(({ service_id, service_name, service_description, service_completed }) => (
-                  <div key={service_id} style={{ borderBottom: "1px solid #6c757d", paddingBottom: "8px", marginBottom: "8px" }}>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <p className="mb-1 fw-bolder">{service_name}</p>
-                      <span className="badge p-2 my-1 border" style={getBadgeStyle(service_completed || "Received")}>
-                        {service_completed || "Received"}
-                      </span>
+                services.map(
+                  ({
+                    service_id,
+                    service_name,
+                    service_description,
+                    service_completed,
+                  }) => (
+                    <div
+                      key={service_id}
+                      style={{
+                        borderBottom: "1px solid #6c757d",
+                        paddingBottom: "8px",
+                        marginBottom: "8px",
+                      }}
+                    >
+                      <div className="d-flex justify-content-between align-items-center">
+                        <p className="mb-1 fw-bolder">{service_name}</p>
+                        <span
+                          className="badge p-2 my-1 border"
+                          style={getBadgeStyle(service_completed || "Received")}
+                        >
+                          {service_completed || "Received"}
+                        </span>
+                      </div>
+                      <p className="text-muted small mb-0">
+                        {service_description}
+                      </p>
                     </div>
-                    <p className="text-muted small mb-0">{service_description}</p>
-                  </div>
-                ))
+                  )
+                )
               )}
 
-             {additionalRequestText && (
-  <div className="d-flex justify-content-between align-items-center mt-3">
-    <div>
-      <h6 className="fw-semibold">Additional Request</h6>
-      <p className="text-muted">{additionalRequestText}</p>
-    </div>
-    <span
-      className="badge p-2 my-1 border"
-      style={getBadgeStyle(additionalRequestStatus)}
-    >
-      {additionalRequestStatus}
-    </span>
-  </div>
-)}
-
-
+              {additionalRequestText && (
+                <div className="d-flex justify-content-between align-items-center mt-3">
+                  <div>
+                    <h6 className="fw-semibold">Additional Request</h6>
+                    <p className="text-muted">{additionalRequestText}</p>
+                  </div>
+                  <span
+                    className="badge p-2 my-1 border"
+                    style={getBadgeStyle(additionalRequestStatus)}
+                  >
+                    {additionalRequestStatus}
+                  </span>
+                </div>
+              )}
             </div>
           </section>
 
           <section className="card shadow-sm rounded mt-4">
-            <header className="card-header" style={{ backgroundColor: "#dc3545", color: "#fff", fontWeight: "bold" }}>
+            <header
+              className="card-header"
+              style={{
+                backgroundColor: "#dc3545",
+                color: "#fff",
+                fontWeight: "bold",
+              }}
+            >
               <i className="fa fa-file-invoice-dollar me-2"></i> Order Summary
             </header>
             <div className="card-body">
-              <p><strong>Total Services:</strong> {services.length}</p>
+              <p>
+                <strong>Total Services:</strong> {services.length}
+              </p>
               <hr />
-              <p className="fs-5 fw-bold">Total: ${order.order_total_price || "0.00"}</p>
+              <p className="fs-5 fw-bold">
+                Total: ${order.order_total_price || "0.00"}
+              </p>
             </div>
           </section>
         </main>
