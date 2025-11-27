@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://your-backend-url.herokuapp.com",
+        target: "https://moticare.herokuapp.com",
         changeOrigin: true,
         secure: false,
       },
