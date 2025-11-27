@@ -52,15 +52,14 @@ function AddEmployee() {
       toast.success("Employee added successfully!");
 
       setTimeout(() => {
-      navigate("/admin/employee");
+        navigate("/admin/employee");
       }, 2000);
-
     } catch (error) {
       const errorMsg = error.response?.data.msg || "Something went wrong!";
       setTimeout(() => {
         toast.error(errorMsg, {
-        position: "top-right",
-      });
+          position: "top-right",
+        });
       }, 100);
       console.log(errorMsg);
     }
@@ -113,7 +112,7 @@ function AddEmployee() {
                 ref={phoneDom}
                 type="tel"
                 className="form-control"
-                placeholder="+251-9999999"
+                placeholder="+254-7xx-xxx-xxx"
               />
             </div>
             <div className="mb-3">
