@@ -3,15 +3,6 @@
 A full-stack **Garage Service Management System** built with **Node.js, Express, MySQL, and React**.  
 This project provides an **Admin Dashboard** to manage customers, employees, vehicles, services, and orders, making garage operations efficient and organized.
 
----
-
-## 📸 Preview
-
-| Dashboard                               |
-| --------------------------------------- |
-| ![](./client/assets/img/Screenshot.png) |
-
----
 
 ## ⚙️ Features
 
@@ -43,8 +34,8 @@ This project provides an **Admin Dashboard** to manage customers, employees, veh
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/amirmub/Garage-Service-app.git
-cd Garage-Service-app
+git clone https://github.com/codewithAntony/moticaree.git
+cd moticaree
 
 ```
 
@@ -56,5 +47,5 @@ npm install
 
 ## 📬 Contact
 
-📧 Email: amirmubarek01@gmail.com <br>
-💻 GitHub: @amirmub
+📧 Email: antonymurithi51@gmail.com <br>
+💻 GitHub: @codewithAntony
