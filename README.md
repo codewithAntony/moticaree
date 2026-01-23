@@ -4,7 +4,7 @@ A full-stack **Garage Service Management System** built with **Node.js, Express,
 This project provides an **Admin Dashboard** to manage customers, employees, vehicles, services, and orders, making garage operations efficient and organized.
 
 
-## ⚙️ Features
+## Features
 
 ✅ Manage Customers, Employees, Vehicles, Services, and Orders  
 ✅ Role-based Authentication (Admin/Employee)  
