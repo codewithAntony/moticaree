@@ -48,4 +48,4 @@ npm install
 ## Contact
 
 📧 Email: antonymurithi51@gmail.com <br>
-💻 GitHub: @codewithAntony
+💻 GitHub: @codewithAntony.
