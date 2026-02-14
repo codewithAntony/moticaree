@@ -1,7 +1,7 @@
 # MotiCare Garage Service Management System
 
 A full-stack **Garage Service Management System** built with **Node.js, Express, MySQL, and React**.  
-This project provides an **Admin Dashboard** to manage customers, employees, vehicles, services, and orders, making garage operations efficient and organized
+This project provides an **Admin Dashboard** to manage customers, employees, vehicles, services, and orders, making garage operations efficient and organized.
 
 
 ## Features
